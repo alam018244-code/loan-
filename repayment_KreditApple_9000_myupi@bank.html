@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment Page</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* MAIN BOX */
+.main-box {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+/* HEADINGS */
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+/* TIMER */
+.timer {
+  text-align: center;
+  color: #d9534f;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* INSTRUCTIONS */
+.instructions {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+.instructions ol {
+  margin: 0;
+  padding-left: 18px;
+}
+
+/* INFO ROW */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* UPI ROW */
+.payment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* BUTTON */
+.payment-row button {
+  padding: 5px 10px;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+.payment-row button:hover {
+  background: #1e40af;
+}
+
+/* QR */
+.qr-box {
+  text-align: center;
+  border: 1px dashed #d1d5db;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.qr-box img {
+  width: 120px;
+  margin-bottom: 5px;
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* SUBMIT */
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background: #1e40af;
+}
+
+/* MESSAGE */
+#msg {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="main-box">
+
+  <h2>Complete Payment</h2>
+
+  <!-- TIMER -->
+  <div class="timer" id="timer">09:00</div>
+
+  <!-- INSTRUCTIONS -->
+  <div class="instructions">
+    <ol>
+      <li>Click Copy to copy UPI ID</li>
+      <li>Pay using your UPI app</li>
+      <li>Enter 12-digit UTR</li>
+      <li>Submit after payment</li>
+    </ol>
+  </div>
+
+  <!-- INFO -->
+  <div class="info-row">
+    <span>Application</span>
+    <span id="appName">App</span>
+  </div>
+
+  <div class="info-row">
+    <span>Amount</span>
+    <span id="amount">0</span>
+  </div>
+<!-- UPI HEADING -->
+<h2>UPI ID</h2>
+
+<!-- UPI -->
+<div class="payment-row">
+  <span id="upiText">upi@id</span>
+  <button onclick="copyUPI()">Copy</button>
+</div>
+
+  <!-- UTR -->
+  <input type="text" id="utr" placeholder="Enter 12-digit UTR">
+  <button class="submit-btn" onclick="submitUTR()">Submit</button>
+
+  <p id="msg"></p>
+
+</div>
+
+<script>
+// FILE NAME DATA
+const f = window.location.pathname.split("/").pop().split(".")[0].split("_");
+
+if(f.length >= 4){
+  document.getElementById("appName").innerText = f[1];
+  document.getElementById("amount").innerText = f[2];
+  document.getElementById("upiText").innerText = f.slice(3).join("_");
+}
+
+// COPY
+function copyUPI(){
+  let t = document.getElementById("upiText").innerText;
+  let ta = document.createElement("textarea");
+  ta.value = t;
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand("copy");
+  document.body.removeChild(ta);
+  showMsg("UPI copied");
+}
+
+// MESSAGE
+function showMsg(m){
+  let el = document.getElementById("msg");
+  el.innerText = m;
+  setTimeout(()=>el.innerText="",3000);
+}
+
+// UTR
+function submitUTR(){
+  let u = document.getElementById("utr").value.trim();
+  if(/^\d{12}$/.test(u)){
+    showMsg("Payment updating...");
+  } else {
+    showMsg("Invalid UTR number");
+  }
+}
+
+// TIMER
+let t = 540;
+let el = document.getElementById("timer");
+
+let c = setInterval(()=>{
+  let m = Math.floor(t/60);
+  let s = t%60;
+  el.innerText = `${m}:${s.toString().padStart(2,'0')}`;
+  t--;
+
+  if(t < 0){
+    clearInterval(c);
+    el.innerText = "Expired";
+    alert("Payment expired!");
+  }
+},1000);
+</script>
+
+</body>
+</html>
