@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment Page</title>
 
 <style>
@@ -79,7 +80,6 @@ h2 {
   font-size: 14px;
 }
 
-/* BUTTON */
 .payment-row button {
   padding: 5px 10px;
   font-size: 12px;
@@ -92,20 +92,6 @@ h2 {
 
 .payment-row button:hover {
   background: #1e40af;
-}
-
-/* QR */
-.qr-box {
-  text-align: center;
-  border: 1px dashed #d1d5db;
-  padding: 12px;
-  border-radius: 6px;
-  margin-bottom: 15px;
-}
-
-.qr-box img {
-  width: 120px;
-  margin-bottom: 5px;
 }
 
 /* INPUT */
@@ -164,22 +150,22 @@ input {
 
   <!-- INFO -->
   <div class="info-row">
-    <span>Application</span>
-    <span id="appName">Kreditapple</span>
+    <span>Product</span>
+    <span id="productName">VIishMoney</span>
   </div>
 
   <div class="info-row">
     <span>Amount</span>
-    <span id="amount">3600</span>
+    <span id="amount">3300</span>
   </div>
-<!-- UPI HEADING -->
-<h2>UPI ID</h2>
 
-<!-- UPI -->
-<div class="payment-row">
-  <span id="upiText">upi@id</span>
-  <button onclick="copyUPI()">Copy</button>
-</div>
+  <!-- UPI -->
+  <h2>UPI ID</h2>
+
+  <div class="payment-row">
+    <span id="upiText">avinashsakpal0518-2@okicici</span>
+    <button onclick="copyUPI()">Copy</button>
+  </div>
 
   <!-- UTR -->
   <input type="text" id="utr" placeholder="Enter 12-digit UTR">
@@ -190,60 +176,51 @@ input {
 </div>
 
 <script>
-// FILE NAME DATA
-const f = window.location.pathname.split("/").pop().split(".")[0].split("_");
 
-if(f.length >= 4){
-  document.getElementById("appName").innerText = f[1];
-  document.getElementById("amount").innerText = f[2];
-  document.getElementById("upiText").innerText = f.slice(3).join("_");
-}
-
-// COPY
+// COPY FUNCTION
 function copyUPI(){
-  let t = document.getElementById("upiText").innerText;
-  let ta = document.createElement("textarea");
-  ta.value = t;
-  document.body.appendChild(ta);
-  ta.select();
-  document.execCommand("copy");
-  document.body.removeChild(ta);
-  showMsg("UPI copied");
+  let text = document.getElementById("upiText").innerText;
+  navigator.clipboard.writeText(text);
+  showMsg("UPI copied successfully");
 }
 
-// MESSAGE
-function showMsg(m){
+// MESSAGE FUNCTION
+function showMsg(message){
   let el = document.getElementById("msg");
-  el.innerText = m;
-  setTimeout(()=>el.innerText="",3000);
+  el.innerText = message;
+  setTimeout(() => el.innerText = "", 3000);
 }
 
-// UTR
+// UTR VALIDATION
 function submitUTR(){
-  let u = document.getElementById("utr").value.trim();
-  if(/^\d{12}$/.test(u)){
+  let utr = document.getElementById("utr").value.trim();
+  if(/^\d{12}$/.test(utr)){
     showMsg("Payment updating...");
   } else {
     showMsg("Invalid UTR number");
   }
 }
 
-// TIMER
-let t = 540;
-let el = document.getElementById("timer");
+// TIMER (9 minutes)
+let time = 540;
+let timerElement = document.getElementById("timer");
 
-let c = setInterval(()=>{
-  let m = Math.floor(t/60);
-  let s = t%60;
-  el.innerText = `${m}:${s.toString().padStart(2,'0')}`;
-  t--;
+let countdown = setInterval(() => {
+  let minutes = Math.floor(time / 60);
+  let seconds = time % 60;
 
-  if(t < 0){
-    clearInterval(c);
-    el.innerText = "Expired";
+  timerElement.innerText = `${minutes}:${seconds.toString().padStart(2,'0')}`;
+
+  time--;
+
+  if(time < 0){
+    clearInterval(countdown);
+    timerElement.innerText = "Expired";
     alert("Payment expired!");
   }
-},1000);
+
+}, 1000);
+
 </script>
 
 </body>
