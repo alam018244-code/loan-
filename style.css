@@ -1,132 +1,62 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+  font-family: Arial;
+  background: #f4f6f9;
+  text-align: center;
+  padding: 50px;
 }
 
-.payment-container {
-    width: 100%;
-    max-width: 450px;
-    background-color: #121212;
-    border-radius: 15px;
-    padding-bottom: 30px;
-    overflow: hidden;
+.box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Header Section */
-.header {
-    background-color: #001f3f;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+h2 {
+  margin-bottom: 20px;
 }
 
-.upi-logo { font-weight: bold; font-size: 20px; }
-.upi-logo span { display: block; font-size: 8px; font-weight: normal; }
-
-/* Order Timer */
-.order-status {
-    background-color: #1e1e1e;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.payment {
+  background: #eef2ff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.timer { color: #ff4d4d; font-weight: bold; font-size: 18px; }
-
-/* Amount */
-.amount-section {
-    text-align: center;
-    margin: 30px 0;
+.payment:hover {
+  background: #dbe4ff;
 }
 
-.amount-section h1 { font-size: 42px; margin-bottom: 5px; }
-.amount-section p { color: #b3b3b3; font-size: 14px; }
-
-/* Payment Methods */
-.method-section { padding: 0 15px; margin-bottom: 25px; }
-.method-label { font-size: 14px; color: #4dabf7; margin-bottom: 10px; }
-.badge { font-size: 10px; background: #e67e22; padding: 2px 6px; border-radius: 4px; color: white; }
-
-.payment-card {
-    background: #252525;
-    border: 1px solid #333;
-    padding: 15px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-.card-info { display: flex; align-items: center; gap: 12px; }
-.card-info img { width: 40px; }
-.card-info strong { font-size: 16px; }
-.card-info p { font-size: 12px; color: #888; }
-
-.pay-btn {
-    background: #000080;
-    color: white;
-    border: none;
-    padding: 8px 25px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
+button {
+  margin-top: 15px;
+  padding: 10px;
+  width: 100%;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.discount-text { font-size: 10px; color: #aaa; margin-right: 10px; }
-
-/* QR Section */
-.qr-container {
-    background: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
+button:hover {
+  background: #45a049;
 }
 
-.qr-box {
-    background: white;
-    padding: 10px;
-    display: inline-block;
-    margin: 15px 0;
-    border-radius: 8px;
-}
-
-.highlight { color: #ff4d4d; font-weight: bold; }
-
-.upi-copy-box {
-    display: flex;
-    margin: 10px 0;
-    gap: 5px;
-}
-
-.upi-copy-box input {
-    flex: 1;
-    background: #252525;
-    border: 1px solid #444;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.copy-btn {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 0 15px;
-    border-radius: 5px;
-    cursor: pointer;
+.msg {
+  margin-top: 15px;
+  color: green;
+  font-weight: bold;
 }
