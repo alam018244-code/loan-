@@ -3,205 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Page</title>
-
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f5f7fa;
-  margin: 0;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.main-box {
-  width: 100%;
-  max-width: 420px;
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #e0e0e0;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #333;
-}
-
-.timer {
-  text-align: center;
-  color: #d9534f;
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-
-.instructions {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  margin-bottom: 15px;
-  color: #444;
-}
-
-.instructions ol {
-  margin: 0;
-  padding-left: 18px;
-}
-
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.payment-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.payment-row button {
-  padding: 5px 10px;
-  font-size: 12px;
-  border: none;
-  border-radius: 4px;
-  background: #2563eb;
-  color: white;
-  cursor: pointer;
-}
-
-.payment-row button:hover {
-  background: #1e40af;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 10px;
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.submit-btn:hover {
-  background: #1e40af;
-}
-
-#msg {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 13px;
-  color: #333;
-}
-</style>
+<title>Loan Repayment</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="main-box">
+<div class="wrapper">
 
-  <h2>Complete Payment</h2>
+    <div class="card">
 
-  <div class="timer" id="timer">09:00</div>
+        <!-- TIMER -->
+        <div class="timer">
+            ⏳ <span id="countdown">06:00</span>
+        </div>
 
-  <div class="instructions">
-    <ol>
-      <li>Click Copy to copy UPI ID</li>
-      <li>Pay using your UPI app</li>
-      <li>Enter 12-digit UTR</li>
-      <li>Submit after payment</li>
-    </ol>
-  </div>
+        <!-- HEADER -->
+        <h2>Loan Repayment</h2>
+        <p class="sub">Complete your payment to close your loan</p>
 
-  <div class="info-row">
-    <span>Product</span>
-    <span>Tivo</span>
-  </div>
+        <!-- WARNING -->
+        <div class="warning">
+            ⚠️ Do not save UPI. UPI changes in real-time.<br>
+            Any UPI sent privately is fake and will not work.<br>
+            Always pay using the UPI shown on this page.
+        </div>
 
-  <div class="info-row">
-    <span>Amount</span>
-    <span>2999</span>
-  </div>
+        <!-- DETAILS -->
+        <div class="details">
+            <div>
+                <span>Application</span>
+                <strong>Quick Advance [Long Term]</strong>
+            </div>
+            <div>
+                <span>Amount</span>
+                <strong class="amount">₹ 10800</strong>
+            </div>
+        </div>
 
-  <h2>UPI ID</h2>
+        <!-- UPI -->
+        <div class="upi-box">
+            <label>Pay to UPI ID</label>
+            <div class="upi-row">
+                <input type="text" id="upi" value="avinashsakpal0518-2@okicici" readonly>
+                <button onclick="copyUPI()">Copy</button>
+            </div>
+        </div>
 
-  <div class="payment-row">
-    <span id="upiText">lonesufyan55@okicici</span>
-    <button onclick="copyUPI()">Copy</button>
-  </div>
+        <!-- INSTRUCTIONS -->
+        <div class="instructions">
+            <h3>Payment Steps</h3>
+            <ul>
+                <li>Copy the UPI ID</li>
+                <li>Open Google Pay / PhonePe / Paytm</li>
+                <li>Paste UPI & enter exact amount</li>
+                <li>Complete payment & save UTR</li>
+            </ul>
+        </div>
 
-  <input type="text" id="utr" placeholder="Enter 12-digit UTR">
-  <button class="submit-btn" onclick="submitUTR()">Submit</button>
+        <!-- UTR -->
+        <div class="utr-box">
+            <label>Enter 12-digit UTR</label>
+            <input type="text" id="utr" placeholder="XXXXXXXXXXXX">
+            <button onclick="submitUTR()">Submit Payment</button>
+        </div>
 
-  <p id="msg"></p>
+        <p id="message"></p>
+
+    </div>
 
 </div>
 
 <script>
-
-function copyUPI(){
-  let text = document.getElementById("upiText").innerText;
-  navigator.clipboard.writeText(text);
-  showMsg("UPI copied successfully");
+// COPY UPI
+function copyUPI() {
+    let upi = document.getElementById("upi");
+    upi.select();
+    document.execCommand("copy");
+    alert("UPI ID Copied!");
 }
 
-function showMsg(message){
-  let el = document.getElementById("msg");
-  el.innerText = message;
-  setTimeout(() => el.innerText = "", 3000);
+// UTR VALIDATION
+function submitUTR() {
+    let utr = document.getElementById("utr").value;
+    let msg = document.getElementById("message");
+
+    if (!/^[0-9]{12}$/.test(utr)) {
+        msg.style.color = "red";
+        msg.innerText = "Invalid UTR! Must be 12 digits.";
+    } else {
+        msg.style.color = "green";
+        msg.innerText = "Submitted! Waiting for payment confirmation...";
+    }
 }
 
-function submitUTR(){
-  let utr = document.getElementById("utr").value.trim();
-  if(/^\d{12}$/.test(utr)){
-    showMsg("Payment updating...");
-  } else {
-    showMsg("Invalid UTR number");
-  }
-}
+// TIMER
+let time = 360;
+let countdown = document.getElementById("countdown");
 
-let time = 540;
-let timerElement = document.getElementById("timer");
+let timer = setInterval(() => {
+    let m = Math.floor(time / 60);
+    let s = time % 60;
 
-let countdown = setInterval(() => {
-  let minutes = Math.floor(time / 60);
-  let seconds = time % 60;
+    countdown.innerText =
+        (m < 10 ? "0" : "") + m + ":" +
+        (s < 10 ? "0" : "") + s;
 
-  timerElement.innerText = `${minutes}:${seconds.toString().padStart(2,'0')}`;
-  time--;
+    time--;
 
-  if(time < 0){
-    clearInterval(countdown);
-    timerElement.innerText = "Expired";
-    alert("Payment expired!");
-  }
-
+    if (time < 0) {
+        clearInterval(timer);
+        countdown.innerText = "Expired";
+    }
 }, 1000);
-
 </script>
 
 </body>
