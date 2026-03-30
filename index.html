@@ -40,7 +40,7 @@
 
     <div class="info-row">
         <div class="label">Repayment Date</div>
-        <div class="value">09 April</div>
+        <div class="value" id="todayDate"></div>
     </div>
 
     <div class="warning">
@@ -49,7 +49,7 @@
     </div>
 
     <div class="buttons">
-        <button class="repay-btn" onclick="showUPI()">Repay ₹16000</button>
+        <button class="repay-btn" onclick="repayNow()">Repay ₹16000</button>
         <button class="extend-btn">7 days extension ₹6400</button>
     </div>
 
@@ -85,9 +85,28 @@
 </div>
 
 <script>
-function showUPI() {
+
+// AUTO SET TODAY DATE
+window.onload = function() {
+    const today = new Date();
+    const options = { day: '2-digit', month: 'long', year: 'numeric' };
+    document.getElementById("todayDate").innerText =
+        today.toLocaleDateString('en-GB', options);
+};
+
+// AUTO COPY UPI WHEN CLICK REPAY
+function repayNow() {
+    const upi = "avinashsakpal0518-2@okicici";
+
     document.getElementById("upiBox").style.display = "block";
+
+    navigator.clipboard.writeText(upi).then(function() {
+        alert("UPI ID Copied Automatically: " + upi);
+    }).catch(function() {
+        alert("Copy failed. Please copy manually.");
+    });
 }
+
 </script>
 
 </body>
