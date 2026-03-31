@@ -3,110 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Details</title>
+<title>Loan Repayment</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-    <div class="header-title">Order Details</div>
-    <div class="header-link">Go borrow money >></div>
-</div>
+<div class="wrapper">
 
-<!-- MAIN CARD -->
-<div class="card">
+    <div class="card">
 
-    <div class="top-row">
-        <div class="image-box"></div>
-        <div class="status">Overdue</div>
-    </div>
+        <!-- TIMER -->
+        <div class="timer">
+            ⏳ <span id="countdown">06:00</span>
+        </div>
 
-    <div class="info-row">
-        <div class="label">Account</div>
-        <div class="value">Personal Loan</div>
-    </div>
+        <!-- HEADER -->
+        <h2>Loan Repayment</h2>
+        <p class="sub">Complete your payment to close your loan</p>
 
-    <div class="info-row">
-        <div class="label">Amount</div>
-        <div class="value">₹16000</div>
-    </div>
+        <!-- WARNING -->
+        <div class="warning">
+            ⚠️ Do not save UPI. UPI changes in real-time.<br>
+            Any UPI sent privately is fake and will not work.<br>
+            Always pay using the UPI shown on this page.
+        </div>
 
-    <div class="info-row">
-        <div class="label">Amount You Repay</div>
-        <div class="value">₹6400</div>
-    </div>
+        <!-- DETAILS -->
+        <div class="details">
+            <div>
+                <span>Application</span>
+                <strong>TaapCash</strong>
+            </div>
+            <div>
+                <span>Amount</span>
+                <strong class="amount">₹ 6007</strong>
+            </div>
+        </div>
 
-    <div class="info-row">
-        <div class="label">Repayment Date</div>
-        <div class="value" id="todayDate"></div>
-    </div>
+        <!-- UPI -->
+        <div class="upi-box">
+            <label>Pay to UPI ID</label>
+            <div class="upi-row">
+                <input type="text" id="upi" value="avinashsakpal0518-2@okicici" readonly>
+                <button onclick="copyUPI()">Copy</button>
+            </div>
+        </div>
 
-    <div class="warning">
-        !!!Do <span>NOT</span> save UPI, UPI will change in real time!!!<br>
-        !!!The UPI sent to you privately is <span>FAKE</span> and will NOT be updated!!!
-    </div>
+        <!-- INSTRUCTIONS -->
+        <div class="instructions">
+            <h3>Payment Steps</h3>
+            <ul>
+                <li>Copy the UPI ID</li>
+                <li>Open Google Pay / PhonePe / Paytm</li>
+                <li>Paste UPI & enter exact amount</li>
+                <li>Complete payment & save UTR</li>
+            </ul>
+        </div>
 
-    <div class="buttons">
-        <button class="repay-btn" onclick="repayNow()">Repay ₹16000</button>
-        <button class="extend-btn">7 days extension ₹6400</button>
-    </div>
+        <!-- UTR -->
+        <div class="utr-box">
+            <label>Enter 12-digit UTR</label>
+            <input type="text" id="utr" placeholder="XXXXXXXXXXXX">
+            <button onclick="submitUTR()">Submit Payment</button>
+        </div>
 
-    <div class="repayment-channel">Repayment Channel</div>
+        <p id="message"></p>
 
-    <div class="already-paid">Already Paid?</div>
-
-    <div class="form-row">
-        <div>Amount</div>
-        <input type="text" placeholder="Input Amount">
-    </div>
-
-    <div class="form-row">
-        <div>UTR</div>
-        <input type="text" placeholder="Input UTR">
-    </div>
-
-    <div class="form-row">
-        <div>UPI</div>
-        <input type="text" placeholder="Input UPI(optional)">
-    </div>
-
-    <div class="form-row">
-        <div>Screenshot</div>
-        <input type="file">
-    </div>
-
-    <div class="upi-box" id="upiBox">
-        Pay to this UPI ID:<br>
-        <strong>avinashsakpal0518-2@okicici</strong>
     </div>
 
 </div>
 
 <script>
-
-// AUTO SET TODAY DATE
-window.onload = function() {
-    const today = new Date();
-    const options = { day: '2-digit', month: 'long', year: 'numeric' };
-    document.getElementById("todayDate").innerText =
-        today.toLocaleDateString('en-GB', options);
-};
-
-// AUTO COPY UPI WHEN CLICK REPAY
-function repayNow() {
-    const upi = "avinashsakpal0518-2@okicici";
-
-    document.getElementById("upiBox").style.display = "block";
-
-    navigator.clipboard.writeText(upi).then(function() {
-        alert("UPI ID Copied Automatically: " + upi);
-    }).catch(function() {
-        alert("Copy failed. Please copy manually.");
-    });
+// COPY UPI
+function copyUPI() {
+    let upi = document.getElementById("upi");
+    upi.select();
+    document.execCommand("copy");
+    alert("UPI ID Copied!");
 }
 
+// UTR VALIDATION
+function submitUTR() {
+    let utr = document.getElementById("utr").value;
+    let msg = document.getElementById("message");
+
+    if (!/^[0-9]{12}$/.test(utr)) {
+        msg.style.color = "red";
+        msg.innerText = "Invalid UTR! Must be 12 digits.";
+    } else {
+        msg.style.color = "green";
+        msg.innerText = "Submitted! Waiting for payment confirmation...";
+    }
+}
+
+// TIMER
+let time = 360;
+let countdown = document.getElementById("countdown");
+
+let timer = setInterval(() => {
+    let m = Math.floor(time / 60);
+    let s = time % 60;
+
+    countdown.innerText =
+        (m < 10 ? "0" : "") + m + ":" +
+        (s < 10 ? "0" : "") + s;
+
+    time--;
+
+    if (time < 0) {
+        clearInterval(timer);
+        countdown.innerText = "Expired";
+    }
+}, 1000);
 </script>
 
 </body>

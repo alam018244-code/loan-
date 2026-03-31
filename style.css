@@ -1,145 +1,156 @@
-body {
+/* RESET */
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f3f3f3;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* HEADER */
-.header {
-    background: #e60012;
-    color: white;
-    padding: 16px;
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #ffffff;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    min-height: 100vh;
 }
 
-.header-title {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.header-link {
-    font-size: 14px;
+/* WRAPPER */
+.wrapper {
+    width: 100%;
+    padding: 15px;
 }
 
 /* CARD */
 .card {
-    background: white;
-    margin: 12px;
-    padding: 15px;
-    border-radius: 8px;
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 380px;
+    margin: auto;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-top: 5px solid #007bff;
 }
 
-/* TOP SECTION */
-.top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.image-box {
-    width: 60px;
-    height: 60px;
-    background: #eee;
-}
-
-.status {
-    color: #e60012;
-    font-weight: bold;
+/* TIMER */
+.timer {
+    text-align: center;
     font-size: 18px;
-}
-
-/* INFO ROWS */
-.info-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.label {
-    color: #888;
-}
-
-.value {
+    color: #dc3545;
     font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* HEADER */
+h2 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.sub {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 
 /* WARNING */
 .warning {
-    margin-top: 15px;
-    font-size: 14px;
-    line-height: 1.5;
+    background: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    border-left: 4px solid #ffc107;
 }
 
-.warning span {
-    color: red;
-    font-weight: bold;
-}
-
-/* BUTTONS */
-.buttons {
+/* DETAILS */
+.details {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-bottom: 15px;
 }
 
-.repay-btn {
-    width: 48%;
-    padding: 14px;
-    border-radius: 30px;
-    border: none;
-    background: #0b6b88;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+.details span {
+    font-size: 12px;
+    color: gray;
 }
 
-.extend-btn {
-    width: 48%;
-    padding: 14px;
-    border-radius: 30px;
-    border: none;
-    background: #36b7ad;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+.details strong {
+    display: block;
+    font-size: 15px;
 }
 
-/* SECTION TITLES */
-.repayment-channel,
-.already-paid {
-    margin-top: 20px;
-    font-weight: bold;
+.amount {
+    color: #007bff;
 }
 
-/* FORM */
-.form-row {
-    margin-top: 15px;
+/* UPI */
+.upi-box label {
+    font-size: 13px;
+    color: gray;
 }
 
-.form-row div {
-    margin-bottom: 5px;
+.upi-row {
+    display: flex;
+    margin-top: 5px;
 }
 
-.form-row input {
-    width: 100%;
+.upi-row input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+}
+
+.upi-row button {
     padding: 10px;
     border: none;
-    border-bottom: 1px solid #ddd;
-    outline: none;
+    background: #007bff;
+    color: white;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
 }
 
-/* UPI BOX */
-.upi-box {
-    display: none;
-    margin-top: 20px;
-    padding: 15px;
-    background: #f9f9f9;
+/* INSTRUCTIONS */
+.instructions {
+    margin: 15px 0;
+}
+
+.instructions h3 {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.instructions ul {
+    padding-left: 18px;
+    font-size: 13px;
+    color: #555;
+}
+
+/* UTR */
+.utr-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
     border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.utr-box button {
+    width: 100%;
+    padding: 12px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* MESSAGE */
+#message {
     text-align: center;
-    font-size: 16px;
+    margin-top: 10px;
+    font-size: 14px;
 }
