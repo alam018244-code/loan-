@@ -10,7 +10,6 @@
 <body>
 
 <div class="wrapper">
-
     <div class="card">
 
         <!-- TIMER -->
@@ -31,22 +30,24 @@
 
         <!-- DETAILS -->
         <div class="details">
-            <div>
+            <div class="row">
                 <span>Application</span>
-                <strong>TappCredit</strong>
+                <strong>BrioCredit</strong>
             </div>
-            <div>
+
+            <div class="row">
                 <span>Amount</span>
-                <strong class="amount">₹ 8000</strong>
+                <strong class="amount">₹ 4021</strong>
             </div>
         </div>
 
-        <!-- UPI -->
+        <!-- UPI SECTION -->
         <div class="upi-box">
             <label>Pay to UPI ID</label>
+
             <div class="upi-row">
-                <input type="text" id="upi" value="syednumaan85-3@okicici" readonly>
-                <button onclick="copyUPI()">Copy</button>
+                <input type="text" id="upi" value="abhishekrameshsakpal007@okhdfcbank" readonly>
+                <button type="button" onclick="copyUPI()">Copy</button>
             </div>
         </div>
 
@@ -61,31 +62,32 @@
             </ul>
         </div>
 
-        <!-- UTR -->
+        <!-- UTR SECTION -->
         <div class="utr-box">
             <label>Enter 12-digit UTR</label>
-            <input type="text" id="utr" placeholder="XXXXXXXXXXXX">
-            <button onclick="submitUTR()">Submit Payment</button>
+            <input type="text" id="utr" placeholder="XXXXXXXXXXXX" maxlength="12">
+            <button type="button" onclick="submitUTR()">Submit Payment</button>
         </div>
 
         <p id="message"></p>
 
     </div>
-
 </div>
 
 <script>
-// COPY UPI
+
+// COPY UPI (Modern Clipboard API)
 function copyUPI() {
-    let upi = document.getElementById("upi");
-    upi.select();
-    document.execCommand("copy");
-    alert("UPI ID Copied!");
+    let upi = document.getElementById("upi").value;
+
+    navigator.clipboard.writeText(upi).then(() => {
+        alert("UPI ID Copied!");
+    });
 }
 
 // UTR VALIDATION
 function submitUTR() {
-    let utr = document.getElementById("utr").value;
+    let utr = document.getElementById("utr").value.trim();
     let msg = document.getElementById("message");
 
     if (!/^[0-9]{12}$/.test(utr)) {
@@ -115,7 +117,9 @@ let timer = setInterval(() => {
         clearInterval(timer);
         countdown.innerText = "Expired";
     }
+
 }, 1000);
+
 </script>
 
 </body>
