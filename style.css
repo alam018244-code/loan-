@@ -1,145 +1,148 @@
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background: #f3f3f3;
 }
 
-/* HEADER */
+body {
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+}
+
 .header {
-    background: #e60012;
-    color: white;
-    padding: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 .header-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .header-link {
-    font-size: 14px;
+    font-size: 13px;
+    color: #007bff;
+    cursor: pointer;
 }
 
-/* CARD */
 .card {
-    background: white;
-    margin: 12px;
+    background: #fff;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* TOP SECTION */
 .top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 .image-box {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background: #eee;
+    border-radius: 10px;
 }
 
 .status {
-    color: #e60012;
-    font-weight: bold;
-    font-size: 18px;
+    background: red;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
 }
 
-/* INFO ROWS */
 .info-row {
     display: flex;
     justify-content: space-between;
-    padding: 14px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.label {
-    color: #888;
-}
-
-.value {
-    font-weight: bold;
-}
-
-/* WARNING */
-.warning {
-    margin-top: 15px;
+    margin-bottom: 10px;
     font-size: 14px;
-    line-height: 1.5;
+}
+
+.warning {
+    background: #fff3cd;
+    color: #b30000;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 12px 0;
+    text-align: center;
 }
 
 .warning span {
-    color: red;
     font-weight: bold;
 }
 
-/* BUTTONS */
 .buttons {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .repay-btn {
-    width: 48%;
-    padding: 14px;
-    border-radius: 30px;
-    border: none;
-    background: #0b6b88;
+    background: #28a745;
     color: white;
-    font-size: 16px;
-    font-weight: bold;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 15px;
     cursor: pointer;
 }
 
 .extend-btn {
-    width: 48%;
-    padding: 14px;
-    border-radius: 30px;
+    background: #ffc107;
     border: none;
-    background: #36b7ad;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
     cursor: pointer;
 }
 
-/* SECTION TITLES */
 .repayment-channel,
 .already-paid {
-    margin-top: 20px;
     font-weight: bold;
+    margin: 15px 0 10px;
+    font-size: 15px;
 }
 
-/* FORM */
 .form-row {
-    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
-.form-row div {
+.form-row label {
+    font-size: 13px;
     margin-bottom: 5px;
 }
 
 .form-row input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-bottom: 1px solid #ddd;
-    outline: none;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
 }
 
-/* UPI BOX */
 .upi-box {
     display: none;
-    margin-top: 20px;
-    padding: 15px;
-    background: #f9f9f9;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 12px;
     border-radius: 8px;
+    margin-top: 15px;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
 }
