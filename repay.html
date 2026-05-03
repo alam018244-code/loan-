@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repay Now</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card center">
+
+        <h2>Repay via UPI</h2>
+
+        <!-- Amount -->
+        <div class="amount-box">
+            <p><strong>Amount:</strong> ₹ 6909</p>
+        </div>
+
+        <!-- UPI ID -->
+        <div class="upi-box">
+            <input type="text" id="upiId" value="atherx65@okicici" readonly>
+            <button onclick="copyUPI()">Copy</button>
+        </div>
+
+        <p class="small-text">
+            Copy the UPI ID and complete payment in your UPI app.
+        </p>
+
+        <!-- UTR Section -->
+        <div class="utr-section">
+            <h3>Submit UTR Number</h3>
+            <input type="number" id="utrInput" placeholder="Enter 12 digit UTR number">
+            <button class="btn" onclick="submitUTR()">Submit</button>
+
+            <p id="message" class="message"></p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+function copyUPI() {
+    var upi = document.getElementById("upiId").value;
+    navigator.clipboard.writeText(upi);
+    alert("UPI ID Copied Successfully!");
+}
+
+function submitUTR() {
+    var utr = document.getElementById("utrInput").value;
+    var message = document.getElementById("message");
+
+    if (utr.length !== 12) {
+        message.style.color = "red";
+        message.innerHTML = "❌ Invalid UTR! Please enter correct 12 digit UTR number.";
+    } else {
+        message.style.color = "green";
+        message.innerHTML = "⏳ Waiting for update. Please wait while we verify your payment.";
+    }
+}
+
+</script>
+
+</body>
+</html>

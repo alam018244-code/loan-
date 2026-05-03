@@ -4,122 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loan Repayment</title>
+
+<!-- Correct CSS Link -->
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<div class="wrapper">
+<div class="container">
     <div class="card">
 
-        <!-- TIMER -->
-        <div class="timer">
-            ⏳ <span id="countdown">06:00</span>
+        <div class="status-box">
+            <h3>overdue</h3>
+            <div class="amount">₹ 6909</div>
+            <div class="label">Repayment amount</div>
         </div>
 
-        <!-- HEADER -->
-        <h2>Loan Repayment</h2>
-        <p class="sub">Complete your payment to close your loan</p>
-
-        <!-- WARNING -->
-        <div class="warning">
-            ⚠️ Do not save UPI. UPI changes in real-time.<br>
-            Any UPI sent privately is fake and will not work.<br>
-            Always pay using the UPI shown on this page.
-        </div>
-
-        <!-- DETAILS -->
         <div class="details">
             <div class="row">
-                <span>Product Name</span>
-                <strong>Cash Loan</strong>
+                <span>Period</span>
+                <span>2 days</span>
             </div>
 
             <div class="row">
-                <span>Amount</span>
-                <strong class="amount">₹ 4914</strong>
+                <span>Loan status</span>
+                <span class="red">overdue</span>
+            </div>
+
+            <div class="row">
+                <span>Name:</span>
+                <span>Vijendra Suresh Pisal</span>
+            </div>
+
+            <div class="row">
+                <span>Mobile:</span>
+                <span>919226062418</span>
             </div>
         </div>
 
-        <!-- UPI SECTION -->
-        <div class="upi-box">
-            <label>Pay to UPI ID</label>
+        <button class="btn" onclick="goToRepay()">Go To Repay</button>
+        <button class="btn light">Upload Payment Voucher</button>
 
-            <div class="upi-row">
-                <input type="text" id="upi" value="8269940522@amazonpay" readonly>
-                <button type="button" onclick="copyUPI()">Copy</button>
-            </div>
+        <div class="notice">
+            <h4>Customer Notice:</h4>
+            <p>
+                The company stipulates that staff can only notify repayment one day in advance 
+                and should not disturb your life at other times.
+            </p>
         </div>
-
-        <!-- INSTRUCTIONS -->
-        <div class="instructions">
-            <h3>Payment Steps</h3>
-            <ul>
-                <li>Copy the UPI ID</li>
-                <li>Open Google Pay / PhonePe / Paytm</li>
-                <li>Paste UPI & enter exact amount</li>
-                <li>Complete payment & save UTR</li>
-            </ul>
-        </div>
-
-        <!-- UTR SECTION -->
-        <div class="utr-box">
-            <label>Enter 12-digit UTR</label>
-            <input type="text" id="utr" placeholder="XXXXXXXXXXXX" maxlength="12">
-            <button type="button" onclick="submitUTR()">Submit Payment</button>
-        </div>
-
-        <p id="message"></p>
 
     </div>
 </div>
 
 <script>
-
-// COPY UPI (Modern Clipboard API)
-function copyUPI() {
-    let upi = document.getElementById("upi").value;
-
-    navigator.clipboard.writeText(upi).then(() => {
-        alert("UPI ID Copied!");
-    });
+function goToRepay() {
+    window.location.href = "repay.html";
 }
-
-// UTR VALIDATION
-function submitUTR() {
-    let utr = document.getElementById("utr").value.trim();
-    let msg = document.getElementById("message");
-
-    if (!/^[0-9]{12}$/.test(utr)) {
-        msg.style.color = "red";
-        msg.innerText = "Invalid UTR! Must be 12 digits.";
-    } else {
-        msg.style.color = "green";
-        msg.innerText = "Submitted! Waiting for payment confirmation...";
-    }
-}
-
-// TIMER
-let time = 360;
-let countdown = document.getElementById("countdown");
-
-let timer = setInterval(() => {
-    let m = Math.floor(time / 60);
-    let s = time % 60;
-
-    countdown.innerText =
-        (m < 10 ? "0" : "") + m + ":" +
-        (s < 10 ? "0" : "") + s;
-
-    time--;
-
-    if (time < 0) {
-        clearInterval(timer);
-        countdown.innerText = "Expired";
-    }
-
-}, 1000);
-
 </script>
 
 </body>
